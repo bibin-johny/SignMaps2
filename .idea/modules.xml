@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sign_Maps.iml" filepath="$PROJECT_DIR$/.idea/modules/Sign_Maps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sign_Maps.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sign_Maps.app.iml" />
+    </modules>
+  </component>
+</project>
