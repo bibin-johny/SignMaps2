@@ -1,0 +1,72 @@
+com/signmaps/BuildConfig.java
+ com.signmaps.BuildConfig
+com/signmaps/DetectorActivity.java
+ com.signmaps.DetectorActivity
+ com.signmaps.DetectorActivity$1
+ com.signmaps.DetectorActivity$2
+ com.signmaps.DetectorActivity$2$1
+ com.signmaps.DetectorActivity$2$2
+ com.signmaps.DetectorActivity$3
+ com.signmaps.DetectorActivity$DetectorMode
+com/signmaps/env/BorderedText.java
+ com.signmaps.env.BorderedText
+com/signmaps/CameraConnectionFragment.java
+ com.signmaps.CameraConnectionFragment
+ com.signmaps.CameraConnectionFragment$1
+ com.signmaps.CameraConnectionFragment$2
+ com.signmaps.CameraConnectionFragment$3
+ com.signmaps.CameraConnectionFragment$4
+ com.signmaps.CameraConnectionFragment$5
+ com.signmaps.CameraConnectionFragment$CompareSizesByArea
+ com.signmaps.CameraConnectionFragment$ConnectionCallback
+ com.signmaps.CameraConnectionFragment$ErrorDialog
+ com.signmaps.CameraConnectionFragment$ErrorDialog$1
+com/signmaps/customview/RecognitionScoreView.java
+ com.signmaps.customview.RecognitionScoreView
+com/signmaps/customview/ResultsView.java
+ com.signmaps.customview.ResultsView
+com/signmaps/CameraActivity.java
+ com.signmaps.CameraActivity
+ com.signmaps.CameraActivity$1
+ com.signmaps.CameraActivity$2
+ com.signmaps.CameraActivity$3
+ com.signmaps.CameraActivity$4
+ com.signmaps.CameraActivity$5
+com/signmaps/customview/AutoFitTextureView.java
+ com.signmaps.customview.AutoFitTextureView
+com/signmaps/MapFragmentView.java
+ com.signmaps.MapFragmentView
+ com.signmaps.MapFragmentView$1
+ com.signmaps.MapFragmentView$1$1
+ com.signmaps.MapFragmentView$2
+ com.signmaps.MapFragmentView$3
+ com.signmaps.MapFragmentView$4
+ com.signmaps.MapFragmentView$5
+ com.signmaps.MapFragmentView$6
+ com.signmaps.MapFragmentView$7
+com/signmaps/tflite/TFLiteObjectDetectionAPIModel.java
+ com.signmaps.tflite.TFLiteObjectDetectionAPIModel
+com/signmaps/ForegroundService.java
+ com.signmaps.ForegroundService
+com/signmaps/LegacyCameraConnectionFragment.java
+ com.signmaps.LegacyCameraConnectionFragment
+ com.signmaps.LegacyCameraConnectionFragment$1
+com/signmaps/tracking/MultiBoxTracker.java
+ com.signmaps.tracking.MultiBoxTracker
+ com.signmaps.tracking.MultiBoxTracker$1
+ com.signmaps.tracking.MultiBoxTracker$TrackedRecognition
+com/signmaps/env/ImageUtils.java
+ com.signmaps.env.ImageUtils
+com/signmaps/MainActivity.java
+ com.signmaps.MainActivity
+ com.signmaps.MainActivity$1
+com/signmaps/env/Size.java
+ com.signmaps.env.Size
+com/signmaps/env/Logger.java
+ com.signmaps.env.Logger
+com/signmaps/customview/OverlayView.java
+ com.signmaps.customview.OverlayView
+ com.signmaps.customview.OverlayView$DrawCallback
+com/signmaps/tflite/Classifier.java
+ com.signmaps.tflite.Classifier
+ com.signmaps.tflite.Classifier$Recognition

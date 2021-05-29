@@ -22,9 +22,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.view.View;
 import android.widget.Button;
@@ -46,11 +51,19 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private MapFragmentView m_mapFragmentView;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
             setupMapFragmentView();
@@ -59,12 +72,11 @@ public class MainActivity extends AppCompatActivity {
                     .requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
         }
 
-        Button switch_view=findViewById(R.id.switchView);
+        Button switch_view = findViewById(R.id.switchView);
         switch_view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Intent intent1=new Intent(MainActivity.this, DetectorActivity.class);
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this, DetectorActivity.class);
                 startActivity(intent1);
             }
         });
@@ -87,8 +99,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-            @NonNull int[] grantResults) {
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS: {
                 for (int index = 0; index < permissions.length; index++) {
@@ -101,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
                         if (!ActivityCompat
                                 .shouldShowRequestPermissionRationale(this, permissions[index])) {
                             Toast.makeText(this, "Required permission " + permissions[index]
-                                                   + " not granted. "
-                                                   + "Please go to settings and turn on for sample app",
-                                           Toast.LENGTH_LONG).show();
+                                            + " not granted. "
+                                            + "Please go to settings and turn on for sample app",
+                                    Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(this, "Required permission " + permissions[index]
                                     + " not granted", Toast.LENGTH_LONG).show();

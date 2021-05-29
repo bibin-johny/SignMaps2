@@ -1,0 +1,123 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.signmaps"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+7-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:5:5-17
+8        android:minSdkVersion="19"
+8-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:5:5-17
+9        android:targetSdkVersion="30" />
+9-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:5:5-17
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:6:5-65
+11-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:6:22-62
+12
+13    <uses-feature android:name="android.hardware.camera" />
+13-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:7:5-60
+13-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:7:19-57
+14    <uses-feature android:name="android.hardware.camera.autofocus" />
+14-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:8:5-70
+14-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:8:19-67
+15
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+16-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:10:5-79
+16-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:10:22-76
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:11:5-81
+17-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:11:22-78
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:12:5-79
+18-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:12:22-76
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:13:5-67
+19-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:13:22-64
+20    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+20-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:14:5-76
+20-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:14:22-73
+21    <!-- To allow starting foreground services on Android P+ -->
+22    <!-- https://developer.android.com/preview/behavior-changes#fg-svc -->
+23    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+23-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:17:5-77
+23-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:17:22-74
+24
+25    <application
+25-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:19:5-52:19
+26        android:allowBackup="true"
+26-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:20:9-35
+27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+27-->[androidx.core:core:1.3.0] C:\Users\Vijay\.gradle\caches\transforms-2\files-2.1\b201bce9aebbe8626c0ed279befc6f76\core-1.3.0\AndroidManifest.xml:24:18-86
+28        android:debuggable="true"
+29        android:icon="@mipmap/ic_launcher"
+29-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:21:9-43
+30        android:label="@string/app_name"
+30-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:22:9-41
+31        android:supportsRtl="true"
+31-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:23:9-35
+32        android:testOnly="true"
+33        android:theme="@style/AppTheme" >
+33-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:24:9-40
+34        <activity
+34-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:25:9-32:20
+35            android:name="com.signmaps.MainActivity"
+35-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:25:19-47
+36            android:theme="@style/AppTheme.NoActionBar" >
+36-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:26:13-56
+37            <intent-filter>
+37-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:27:13-31:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:28:17-69
+38-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:28:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:30:17-77
+40-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:30:27-74
+41            </intent-filter>
+42        </activity>
+43        <activity
+43-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:34:9-38:20
+44            android:name="com.signmaps.DetectorActivity"
+44-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:35:13-45
+45            android:label="@string/app_name"
+45-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:36:13-45
+46            android:screenOrientation="portrait" >
+46-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:37:13-49
+47        </activity>
+48
+49        <!--
+50         Developers should put application credentials here.To obtain them, please register the application
+51         at https://developer.here.com/develop/mobile-sdks
+52        -->
+53        <meta-data
+53-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:42:9-44:52
+54            android:name="com.here.android.maps.appid"
+54-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:43:13-55
+55            android:value="bBk4mex9bfFt9t00AZLH" />
+55-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:44:13-49
+56        <meta-data
+56-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:45:9-47:54
+57            android:name="com.here.android.maps.apptoken"
+57-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:46:13-58
+58            android:value="aX2-BuRMvYwdOIAnzhEUxQ" />
+58-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:47:13-51
+59        <meta-data
+59-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:48:9-50:716
+60            android:name="com.here.android.maps.license.key"
+60-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:49:13-61
+61            android:value="gjBg4PLVeheI72+0g9GbBO/S6Yj9w7dQ8Omxf9GmWbDckj6eMbHWpbjvKx35PicIsHkdCMvGxvj9XAOvFPecjn9sQJbdlvWQH3p88kvVttXywD/r6GWoKYKNZdd5Fs2/LHwk5GlpVcx76x0iZwjuUTX8wpZZeXEKHrHSC4BrCzrHHxmVYyWe3A5sZlTh39CsnhNH1mw0b6ckTz4y7L6b02/QzY6QpQ0iG6hpGlLRJ++UoW5fXzVNy+h97toLtjS56VF1kJjs/ReADf23kI6Zx7H4SnYDeY1Os+xIVTaXA9Lc/5xbGe3GGtlrHaaHKjwyL7K/VFjPy5QsQW0SmI/EXd247CAjXSer1AjwIWXw1vthtZhIZ+XPXXTKRsbM0vnnxjTYMZh3stOy7A1VLAzLNpIQAocsYrwgrSXOREnGV5TXIR9F8Qadl/SuCQzaanhvjQXrZqwvht9jHjZPhoMW1UiiYTDeVWO7rU4XNXby7Oxls2hNUZhjsrL9B4nwWKl9gl44CWILFd9KhRKt8kPAvE8Fh3yZ3fu5D2xVuc2tB3E4M3RSCF48Aq1falTwX5jm1EFK5Jwuh6jEtAdleuREv7n7uF+gHW/QRc+qlVOQlaqlgIhmC6SBv+AXbiMgAUeOzha3e5TRbiJSkIC0XeSwBnX9DtOD3gxQZD5gDNjssEU=" />
+61-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:50:13-713
+62
+63        <service android:name="com.signmaps.ForegroundService" />
+63-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:51:9-54
+63-->C:\Users\Vijay\Desktop\SignMaps2\app\src\main\AndroidManifest.xml:51:18-51
+64        <service
+64-->[:HERE-sdk:] C:\Users\Vijay\.gradle\caches\transforms-2\files-2.1\b9c5f109272e6f653a5009d2ab3c4b7f\HERE-sdk\AndroidManifest.xml:12:9-14:40
+65            android:name="com.nokia.maps.MapServiceInternal"
+65-->[:HERE-sdk:] C:\Users\Vijay\.gradle\caches\transforms-2\files-2.1\b9c5f109272e6f653a5009d2ab3c4b7f\HERE-sdk\AndroidManifest.xml:13:13-61
+66            android:exported="false" />
+66-->[:HERE-sdk:] C:\Users\Vijay\.gradle\caches\transforms-2\files-2.1\b9c5f109272e6f653a5009d2ab3c4b7f\HERE-sdk\AndroidManifest.xml:14:13-37
+67    </application>
+68
+69</manifest>
