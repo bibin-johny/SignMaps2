@@ -50,6 +50,10 @@ class MapFragmentView {
     private GeoBoundingBox m_geoBoundingBox;
     private Route m_route;
     private boolean m_foregroundServiceStarted;
+    private double latt1;
+    private double longi1;
+    private double latt2;
+    private double longi2;
 
     MapFragmentView(AppCompatActivity activity) {
         m_activity = activity;
@@ -113,6 +117,10 @@ class MapFragmentView {
     private void createRoute() {
         /* Initialize a CoreRouter */
         CoreRouter coreRouter = new CoreRouter();
+        latt1=MainActivity.lat1;
+        longi1=MainActivity.lon1;
+        latt2=MainActivity.lat2;
+        longi2=MainActivity.lon2;
 
         /* Initialize a RoutePlan */
         RoutePlan routePlan = new RoutePlan();
@@ -136,9 +144,9 @@ class MapFragmentView {
 
         /* Define waypoints for the route */
         /* START: 4350 Still Creek Dr */
-        RouteWaypoint startPoint = new RouteWaypoint(new GeoCoordinate(49.259149, -123.008555));
+        RouteWaypoint startPoint = new RouteWaypoint(new GeoCoordinate(latt1, longi1));
         /* END: Langley BC */
-        RouteWaypoint destination = new RouteWaypoint(new GeoCoordinate(49.073640, -122.559549));
+        RouteWaypoint destination = new RouteWaypoint(new GeoCoordinate(latt2, longi2));
 
         /* Add both waypoints to the route plan */
         routePlan.addWaypoint(startPoint);

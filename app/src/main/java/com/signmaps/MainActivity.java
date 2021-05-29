@@ -20,6 +20,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -35,11 +37,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  * Main activity which launches map view and handles Android run-time requesting permission.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PopUp.Listener{
 
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
     private static final String[] RUNTIME_PERMISSIONS = {
@@ -52,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
     private MapFragmentView m_mapFragmentView;
     private DrawerLayout drawer;
+    private Button search;
+    private String loc1;
+    private String loc2;
+    private Geocoder geocoder;
+    public static double lat1;
+    public static double lon1;
+    public static double lat2;
+    public static double lon2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        search = (Button) findViewById(R.id.btn);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowPopup();
+            }
+        });
+        geocoder = new Geocoder(this);
 
         if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
             setupMapFragmentView();
@@ -80,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+    public void ShowPopup() {
+        PopUp popupdialog =new PopUp();
+        popupdialog.show(getSupportFragmentManager(),"popup");
     }
 
     /**
@@ -150,5 +175,19 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         m_mapFragmentView.onDestroy();
         super.onDestroy();
+    }
+    @Override
+    public void applyTexts(String starting, String ending) throws IOException {
+        loc1=starting;
+        loc2=ending;
+        List<Address> addresses= geocoder.getFromLocationName(loc1,1);
+        Address address1 = addresses.get(0);
+        List<Address> addresses2= geocoder.getFromLocationName(loc2,1);
+        Address address2 = addresses2.get(0);
+        lat1=address1.getLatitude();
+        lon1=address1.getLongitude();
+        lat2=address2.getLatitude();
+        lon2=address2.getLongitude();
+
     }
 }
