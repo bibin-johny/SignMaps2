@@ -12,6 +12,7 @@
         <item android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_message"
             android:title="Favorites"/>
+
     </group>
 
     <item android:title="Second Menu">

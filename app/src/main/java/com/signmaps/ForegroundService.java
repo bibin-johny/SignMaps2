@@ -33,8 +33,8 @@ public class ForegroundService extends Service {
 
     public static int FOREGROUND_SERVICE_ID = 101;
 
-    public static String START_ACTION = "com.signmaps.fs.action.start";
-    public static String STOP_ACTION = "com.signmaps.fs.action.stop";
+    public static String START_ACTION = "com.here.android.example.voice.guidance.fs.action.start";
+    public static String STOP_ACTION = "com.here.android.example.voice.guidance.fs.action.stop";
 
     private static String CHANNEL = "default";
 
@@ -55,13 +55,13 @@ public class ForegroundService extends Service {
                     PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
             Notification notification =
-                new NotificationCompat.Builder(this.getApplicationContext(), CHANNEL)
-                    .setContentTitle("Sign Maps")
-                    .setContentText("Sign Maps in progress ...")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentIntent(pendingIntent)
-                    .setLocalOnly(true)
-                    .build();
+                    new NotificationCompat.Builder(this.getApplicationContext(), CHANNEL)
+                            .setContentTitle("Guidance")
+                            .setContentText("Guidance in progress ...")
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentIntent(pendingIntent)
+                            .setLocalOnly(true)
+                            .build();
 
             startForeground(FOREGROUND_SERVICE_ID, notification);
         } else if (intent.getAction().equals(STOP_ACTION)) {
@@ -95,3 +95,4 @@ public class ForegroundService extends Service {
         return null;
     }
 }
+

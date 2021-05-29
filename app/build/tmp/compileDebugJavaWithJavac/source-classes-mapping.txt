@@ -44,10 +44,23 @@ com/signmaps/MapFragmentView.java
  com.signmaps.MapFragmentView$5
  com.signmaps.MapFragmentView$6
  com.signmaps.MapFragmentView$7
+ com.signmaps.MapFragmentView$8
+ com.signmaps.MapFragmentView$9
+ com.signmaps.MapFragmentView$9$1
 com/signmaps/tflite/TFLiteObjectDetectionAPIModel.java
  com.signmaps.tflite.TFLiteObjectDetectionAPIModel
 com/signmaps/ForegroundService.java
  com.signmaps.ForegroundService
+com/signmaps/VoicePackagesActivity.java
+ com.signmaps.VoicePackagesActivity
+ com.signmaps.VoicePackagesActivity$1
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$1
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$1$1
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$1$2
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$1$2$1
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$1$2$2
+ com.signmaps.VoicePackagesActivity$VoicePackagesAdapter$VoiceViewHolder
 com/signmaps/LegacyCameraConnectionFragment.java
  com.signmaps.LegacyCameraConnectionFragment
  com.signmaps.LegacyCameraConnectionFragment$1
@@ -60,6 +73,12 @@ com/signmaps/env/ImageUtils.java
 com/signmaps/MainActivity.java
  com.signmaps.MainActivity
  com.signmaps.MainActivity$1
+com/signmaps/VoiceSkinsActivity.java
+ com.signmaps.VoiceSkinsActivity
+ com.signmaps.VoiceSkinsActivity$1
+ com.signmaps.VoiceSkinsActivity$VoiceSkinsAdapter
+ com.signmaps.VoiceSkinsActivity$VoiceSkinsAdapter$1
+ com.signmaps.VoiceSkinsActivity$VoiceSkinsAdapter$VoiceViewHolder
 com/signmaps/env/Size.java
  com.signmaps.env.Size
 com/signmaps/env/Logger.java
