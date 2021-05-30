@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SignMaps2-Sign_Maps.iml" filepath="$PROJECT_DIR$/.idea/modules/SignMaps2-Sign_Maps.iml" group="Sign_Maps" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sign_Maps.iml" filepath="$PROJECT_DIR$/.idea/modules/Sign_Maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sign_Maps.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sign_Maps.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="Sign Maps/app" />
     </modules>
   </component>
 </project>
