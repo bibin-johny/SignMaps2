@@ -43,6 +43,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.IOException;
 import java.util.List;
 
+
 /**
  * Main activity which launches map view and handles Android run-time requesting permission.
  */
@@ -206,8 +207,10 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener, N
             case R.id.nav_favorites:
                 Toast.makeText(this, "clicked Favorites", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.nav_voice_sett:
+            case R.id.voiceCtrlButton:
                 Toast.makeText(this, "clicked Voice Settings", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, VoiceSkinsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_settings:
                 Toast.makeText(this, "clicked Settings", Toast.LENGTH_SHORT).show();

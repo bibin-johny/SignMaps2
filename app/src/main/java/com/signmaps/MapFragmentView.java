@@ -59,7 +59,7 @@ class MapFragmentView {
         m_activity = activity;
         initMapFragment();
         initNaviControlButton();
-        initVoicePackagesButton();
+
     }
 
     private AndroidXMapFragment getMapFragment() {
@@ -237,16 +237,7 @@ class MapFragmentView {
         });
     }
 
-    private void initVoicePackagesButton() {
-        Button m_voicePackagesButton = m_activity.findViewById(R.id.voiceCtrlButton);
-        m_voicePackagesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(m_activity, VoiceSkinsActivity.class);
-                m_activity.startActivity(intent);
-            }
-        });
-    }
+
 
     /*
      * Android 8.0 (API level 26) limits how frequently background apps can retrieve the user's
