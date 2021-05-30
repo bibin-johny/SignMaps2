@@ -7,6 +7,14 @@
     android:orientation="vertical"
     android:padding="5dp">
 
+
+    <EditText
+        android:id="@+id/ed1"
+        android:layout_width="550px"
+        android:layout_height="wrap_content"
+        android:hint="Choose starting point"
+        android:layout_gravity="center"
+        android:inputType="text"/>
     <EditText
         android:id="@+id/ed2"
         android:layout_width="550px"
@@ -16,15 +24,7 @@
         android:layout_gravity="center"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/ed1"
-        android:layout_width="550px"
-        android:layout_height="wrap_content"
-        android:hint="Choose starting point"
-        android:layout_gravity="center"
-        android:inputType="text"
 
-        />
 
 
 

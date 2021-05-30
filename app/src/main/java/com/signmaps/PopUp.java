@@ -28,8 +28,8 @@ public class PopUp extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.popup,null);
         builder.setView(view)
-                .setTitle("Enter Details")
-                .setPositiveButton("START", new DialogInterface.OnClickListener() {
+                .setTitle("Enter Journey Details")
+                .setPositiveButton("Done", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String starting = current.getText().toString();

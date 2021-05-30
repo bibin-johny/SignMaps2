@@ -18,6 +18,7 @@ import com.here.android.mpa.routing.Route;
 import com.here.android.mpa.routing.RouteOptions;
 import com.here.android.mpa.routing.RoutePlan;
 import com.here.android.mpa.routing.RouteResult;
+import static com.signmaps.CameraActivity.lat;
 import com.here.android.mpa.routing.RouteWaypoint;
 import com.here.android.mpa.routing.Router;
 import com.here.android.mpa.routing.RoutingError;
@@ -54,12 +55,13 @@ class MapFragmentView {
     private double longi1;
     private double latt2;
     private double longi2;
+    private double clat;
+    private double clongi;
 
     MapFragmentView(AppCompatActivity activity) {
         m_activity = activity;
         initMapFragment();
         initNaviControlButton();
-        initVoicePackagesButton();
     }
 
     private AndroidXMapFragment getMapFragment() {
@@ -85,7 +87,16 @@ class MapFragmentView {
 
                     if (error == Error.NONE) {
                         m_map = m_mapFragment.getMap();
-                        m_map.setCenter(new GeoCoordinate(49.259149, -123.008555),
+                        clat= lat;
+                        clongi=CameraActivity.longi;
+                        /*String s5=clat+"";
+                        Log.i("my tag",s5);*/
+                        if (clat==0.0){
+                            clat=49.259149;
+                            clongi=-123.008555;
+
+                        }
+                        m_map.setCenter(new GeoCoordinate(clat, clongi),
                                 Map.Animation.NONE);
                         //Put this call in Map.onTransformListener if the animation(Linear/Bow)
                         //is used in setCenter()
@@ -117,10 +128,10 @@ class MapFragmentView {
     private void createRoute() {
         /* Initialize a CoreRouter */
         CoreRouter coreRouter = new CoreRouter();
-        latt1=MainActivity.lat1;
-        longi1=MainActivity.lon1;
-        latt2=MainActivity.lat2;
-        longi2=MainActivity.lon2;
+        latt1=CameraActivity.lat1;
+        longi1=CameraActivity.lon1;
+        latt2=CameraActivity.lat2;
+        longi2=CameraActivity.lon2;
 
         /* Initialize a RoutePlan */
         RoutePlan routePlan = new RoutePlan();
@@ -195,9 +206,7 @@ class MapFragmentView {
                                         Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(m_activity,
-                                    "Error:route calculation returned error code: "
-                                            + routingError,
+                            Toast.makeText(m_activity,"Please enter a valid starting point and destination point",
                                     Toast.LENGTH_LONG).show();
 
                         }
@@ -225,6 +234,7 @@ class MapFragmentView {
                 if (m_route == null) {
                     createRoute();
                 } else {
+                    Toast.makeText(m_activity, "Please enter the starting point and destination point", Toast.LENGTH_LONG).show();
                     m_navigationManager.stop();
                     /*
                      * Restore the map orientation to show entire route on screen
@@ -237,16 +247,6 @@ class MapFragmentView {
         });
     }
 
-    private void initVoicePackagesButton() {
-        Button m_voicePackagesButton = m_activity.findViewById(R.id.voiceCtrlButton);
-        m_voicePackagesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(m_activity, VoiceSkinsActivity.class);
-                m_activity.startActivity(intent);
-            }
-        });
-    }
 
     /*
      * Android 8.0 (API level 26) limits how frequently background apps can retrieve the user's

@@ -19,14 +19,25 @@ package com.signmaps;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
+import android.view.MenuItem;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.params.StreamConfigurationMap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.media.Image;
 import android.media.Image.Plane;
+import com.google.android.material.navigation.NavigationView;
+import java.io.IOException;
+import java.util.List;
+import android.location.Location;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
 import android.os.Build;
@@ -36,25 +47,39 @@ import android.os.HandlerThread;
 import android.os.Trace;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.util.Size;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.List;
+
+import com.google.android.material.navigation.NavigationView;
 import com.signmaps.env.ImageUtils;
 import com.signmaps.env.Logger;
 
 public abstract class CameraActivity extends AppCompatActivity
-    implements OnImageAvailableListener,
+    implements OnImageAvailableListener,PopUp.Listener, NavigationView.OnNavigationItemSelectedListener,
         Camera.PreviewCallback,
         CompoundButton.OnCheckedChangeListener{
   private static final Logger LOGGER = new Logger();
@@ -76,7 +101,30 @@ public abstract class CameraActivity extends AppCompatActivity
   private Runnable imageConverter;
 
   protected TextView inferenceTimeTextView;
+  private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+  private static final String[] RUNTIME_PERMISSIONS = {
+          Manifest.permission.ACCESS_FINE_LOCATION,
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          Manifest.permission.INTERNET,
+          Manifest.permission.ACCESS_WIFI_STATE,
+          Manifest.permission.ACCESS_NETWORK_STATE
+  };
 
+  private MapFragmentView m_mapFragmentView;
+  private DrawerLayout drawer;
+  private Button search;
+  private String loc1;
+  private String loc2;
+  public static double lat;
+  public static double longi;
+  private FusedLocationProviderClient fusedLocationProviderClient;
+  private Geocoder geocoder;
+  public static double lat1;
+  public static double lon1;
+  public static double lat2;
+  public static double lon2;
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
     LOGGER.d("onCreate " + this);
@@ -93,10 +141,126 @@ public abstract class CameraActivity extends AppCompatActivity
     } else {
       requestPermission();
     }
+    drawer = findViewById(R.id.drawer_layout);
+
+    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView.setNavigationItemSelectedListener(this);
+
+    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+    drawer.addDrawerListener(toggle);
+    toggle.syncState();
+    search = (Button) findViewById(R.id.btn);
+    search.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        ShowPopup();
+      }
+    });
+    geocoder = new Geocoder(this);
+    fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+    if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
+      getCurrentLocation();
+      setupMapFragmentView();
+    } else {
+      ActivityCompat
+              .requestPermissions(this, RUNTIME_PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
+    }
+
 
     inferenceTimeTextView = findViewById(R.id.inference_info);
   }
 
+  public void ShowPopup() {
+    PopUp popupdialog = new PopUp();
+    popupdialog.show(getSupportFragmentManager(), "popup");
+  }
+  public void getCurrentLocation(){
+    fusedLocationProviderClient.getLastLocation()
+            .addOnSuccessListener(new OnSuccessListener<Location>() {
+              @Override
+              public void onSuccess(Location location) {
+                if( location != null){
+                  lat= location.getLatitude();
+                  longi = location.getLongitude();
+                }
+
+              }
+            });
+  }
+  /**
+   * Only when the app's target SDK is 23 or higher, it requests each dangerous permissions it
+   * needs when the app is running.
+   */
+  private static boolean hasPermissions(Context context, String... permissions) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && permissions != null) {
+      for (String permission : permissions) {
+        if (ActivityCompat.checkSelfPermission(context, permission)
+                != PackageManager.PERMISSION_GRANTED) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (drawer.isDrawerOpen(GravityCompat.START)) {
+      drawer.closeDrawer(GravityCompat.START);
+    } else {
+      super.onBackPressed();
+    }
+  }
+
+
+  private void setupMapFragmentView() {
+    // All permission requests are being handled. Create map fragment view. Please note
+    // the HERE Mobile SDK requires all permissions defined above to operate properly.
+    m_mapFragmentView = new MapFragmentView(this);
+  }
+
+  @Override
+  public void onDestroy() {
+    m_mapFragmentView.onDestroy();
+    super.onDestroy();
+  }
+
+  @Override
+  public void applyTexts(String starting, String ending) throws IOException {
+    loc1 = starting;
+    loc2 = ending;
+    List<Address> addresses = geocoder.getFromLocationName(loc1, 1);
+    Address address1 = addresses.get(0);
+    List<Address> addresses2 = geocoder.getFromLocationName(loc2, 1);
+    Address address2 = addresses2.get(0);
+    lat1 = address1.getLatitude();
+    lon1 = address1.getLongitude();
+    lat2 = address2.getLatitude();
+    lon2 = address2.getLongitude();
+
+  }
+
+  @Override
+  public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    switch (menuItem.getItemId()) {
+      case R.id.nav_favorites:
+        Toast.makeText(this, "clicked Favorites", Toast.LENGTH_SHORT).show();
+        break;
+      case R.id.voiceCtrlButton:
+        Toast.makeText(this, "clicked Voice Settings", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(CameraActivity.this, VoiceSkinsActivity.class);
+        startActivity(intent);
+        break;
+      case R.id.nav_settings:
+        Toast.makeText(this, "clicked Settings", Toast.LENGTH_SHORT).show();
+        break;
+      case R.id.nav_about:
+        Toast.makeText(this, "clicked About Us", Toast.LENGTH_SHORT).show();
+        break;
+    }
+    drawer.closeDrawer(GravityCompat.START);
+    return true;
+  }
   protected int[] getRgbBytes() {
     imageConverter.run();
     return rgbBytes;
@@ -111,6 +275,7 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   /** Callback for android.hardware.Camera API */
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
   public void onPreviewFrame(final byte[] bytes, final Camera camera) {
     if (isProcessingFrame) {
@@ -257,11 +422,7 @@ public abstract class CameraActivity extends AppCompatActivity
     super.onStop();
   }
 
-  @Override
-  public synchronized void onDestroy() {
-    LOGGER.d("onDestroy " + this);
-    super.onDestroy();
-  }
+
 
   protected synchronized void runInBackground(final Runnable r) {
     if (handler != null) {
@@ -269,9 +430,11 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
-  public void onRequestPermissionsResult(
-      final int requestCode, final String[] permissions, final int[] grantResults) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                         @NonNull int[] grantResults) {
     if (requestCode == PERMISSIONS_REQUEST) {
       if (allPermissionsGranted(grantResults)) {
         setFragment();
@@ -279,7 +442,36 @@ public abstract class CameraActivity extends AppCompatActivity
         requestPermission();
       }
     }
+    switch (requestCode) {
+      case REQUEST_CODE_ASK_PERMISSIONS: {
+        for (int index = 0; index < permissions.length; index++) {
+          if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+
+            /*
+             * If the user turned down the permission request in the past and chose the
+             * Don't ask again option in the permission request system dialog.
+             */
+            if (!ActivityCompat
+                    .shouldShowRequestPermissionRationale(this, permissions[index])) {
+              Toast.makeText(this, "Required permission " + permissions[index]
+                              + " not granted. "
+                              + "Please go to settings and turn on for sample app",
+                      Toast.LENGTH_LONG).show();
+            } else {
+              Toast.makeText(this, "Required permission " + permissions[index]
+                      + " not granted", Toast.LENGTH_LONG).show();
+            }
+          }
+        }
+
+        setupMapFragmentView();
+        break;
+      }
+      default:
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
   }
+
 
   private static boolean allPermissionsGranted(final int[] grantResults) {
     for (int result : grantResults) {
@@ -312,6 +504,7 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   // Returns true if the device supports the required hardware level, or better.
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   private boolean isHardwareLevelSupported(
       CameraCharacteristics characteristics, int requiredLevel) {
     int deviceLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
@@ -322,6 +515,7 @@ public abstract class CameraActivity extends AppCompatActivity
     return requiredLevel <= deviceLevel;
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   private String chooseCamera() {
     final CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
     try {
@@ -358,6 +552,7 @@ public abstract class CameraActivity extends AppCompatActivity
     return null;
   }
 
+  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   protected void setFragment() {
     String cameraId = chooseCamera();
 
@@ -366,6 +561,7 @@ public abstract class CameraActivity extends AppCompatActivity
       CameraConnectionFragment camera2Fragment =
           CameraConnectionFragment.newInstance(
               new CameraConnectionFragment.ConnectionCallback() {
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onPreviewSizeChosen(final Size size, final int rotation) {
                   previewHeight = size.getHeight();
