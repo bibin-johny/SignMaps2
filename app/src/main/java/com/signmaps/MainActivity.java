@@ -33,9 +33,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
 import java.util.List;
@@ -44,7 +47,7 @@ import java.util.List;
  * Main activity which launches map view and handles Android run-time requesting permission.
  */
 
-public class MainActivity extends AppCompatActivity implements PopUp.Listener{
+public class MainActivity extends AppCompatActivity implements PopUp.Listener, NavigationView.OnNavigationItemSelectedListener {
 
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
     private static final String[] RUNTIME_PERMISSIONS = {
@@ -74,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -102,9 +109,10 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener{
             }
         });
     }
+
     public void ShowPopup() {
-        PopUp popupdialog =new PopUp();
-        popupdialog.show(getSupportFragmentManager(),"popup");
+        PopUp popupdialog = new PopUp();
+        popupdialog.show(getSupportFragmentManager(), "popup");
     }
 
     /**
@@ -176,18 +184,39 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener{
         m_mapFragmentView.onDestroy();
         super.onDestroy();
     }
+
     @Override
     public void applyTexts(String starting, String ending) throws IOException {
-        loc1=starting;
-        loc2=ending;
-        List<Address> addresses= geocoder.getFromLocationName(loc1,1);
+        loc1 = starting;
+        loc2 = ending;
+        List<Address> addresses = geocoder.getFromLocationName(loc1, 1);
         Address address1 = addresses.get(0);
-        List<Address> addresses2= geocoder.getFromLocationName(loc2,1);
+        List<Address> addresses2 = geocoder.getFromLocationName(loc2, 1);
         Address address2 = addresses2.get(0);
-        lat1=address1.getLatitude();
-        lon1=address1.getLongitude();
-        lat2=address2.getLatitude();
-        lon2=address2.getLongitude();
+        lat1 = address1.getLatitude();
+        lon1 = address1.getLongitude();
+        lat2 = address2.getLatitude();
+        lon2 = address2.getLongitude();
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.nav_favorites:
+                Toast.makeText(this, "clicked Favorites", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_voice_sett:
+                Toast.makeText(this, "clicked Voice Settings", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_settings:
+                Toast.makeText(this, "clicked Settings", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_about:
+                Toast.makeText(this, "clicked About Us", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
