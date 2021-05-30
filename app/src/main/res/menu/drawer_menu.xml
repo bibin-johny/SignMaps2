@@ -3,26 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_message"
-            android:icon="@drawable/ic_message"
-            android:title="Message"/>
-        <item android:id="@+id/nav_route"
-            android:icon="@drawable/ic_message"
-            android:title="Routes"/>
         <item android:id="@+id/nav_favorites"
-            android:icon="@drawable/ic_message"
-            android:title="Favorites"/>
+            android:icon="@drawable/ic_favorite"
+            android:title="Favorite"/>
+        <item android:id="@+id/nav_voice_sett"
+            android:icon="@drawable/ic_voice_settings"
+            android:title="Voice Settings"/>
+        <item android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="Settings"/>
+        <item android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:title="About Us"/>
 
     </group>
 
-    <item android:title="Second Menu">
-        <menu>
-            <item android:id="@+id/nav_navigation"
-                android:icon="@drawable/ic_message"
-                android:title="Navigation"/>
-            <item android:id="@+id/nav_share"
-                android:icon="@drawable/ic_message"
-                android:title="Favorites"/>
-        </menu>
-    </item>
+
 </menu>
