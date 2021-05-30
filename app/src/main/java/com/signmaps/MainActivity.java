@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -38,6 +39,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
@@ -69,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener, N
     public static double lon1;
     public static double lat2;
     public static double lon2;
+    public static double lat;
+    public static double longi;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +101,10 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener, N
             }
         });
         geocoder = new Geocoder(this);
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         if (hasPermissions(this, RUNTIME_PERMISSIONS)) {
+            getCurrentLocation();
             setupMapFragmentView();
         } else {
             ActivityCompat
@@ -115,6 +125,20 @@ public class MainActivity extends AppCompatActivity implements PopUp.Listener, N
         PopUp popupdialog = new PopUp();
         popupdialog.show(getSupportFragmentManager(), "popup");
     }
+    public void getCurrentLocation(){
+        fusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if( location != null){
+                            lat= location.getLatitude();
+                            longi = location.getLongitude();
+                        }
+
+                    }
+                });
+    }
+
 
     /**
      * Only when the app's target SDK is 23 or higher, it requests each dangerous permissions it

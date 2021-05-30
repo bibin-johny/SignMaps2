@@ -35,6 +35,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import static com.signmaps.MainActivity.lat;
+
 /**
  * This class encapsulates the properties and functionality of the Map view.It also triggers a
  * turn-by-turn navigation from HERE Burnaby office to Langley BC.There is a sample voice skin
@@ -54,6 +56,8 @@ class MapFragmentView {
     private double longi1;
     private double latt2;
     private double longi2;
+    private double clat;
+    private double clongi;
 
     MapFragmentView(AppCompatActivity activity) {
         m_activity = activity;
@@ -85,7 +89,16 @@ class MapFragmentView {
 
                     if (error == Error.NONE) {
                         m_map = m_mapFragment.getMap();
-                        m_map.setCenter(new GeoCoordinate(49.259149, -123.008555),
+                        clat= lat;
+                        clongi=MainActivity.longi;
+                        /*String s5=clat+"";
+                        Log.i("my tag",s5);*/
+                        if (clat==0.0){
+                            clat=49.259149;
+                            clongi=-123.008555;
+
+                        }
+                        m_map.setCenter(new GeoCoordinate(clat, clongi),
                                 Map.Animation.NONE);
                         //Put this call in Map.onTransformListener if the animation(Linear/Bow)
                         //is used in setCenter()
