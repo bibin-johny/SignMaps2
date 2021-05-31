@@ -212,6 +212,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   @Override
                   public void onInit(int status) {
                     if (status == TextToSpeech.SUCCESS) {
+                      Camerapop(result.getTitle().toUpperCase());
                       String textToSay = "Detected Traffic symbol" + result.getTitle();
                       s1 = s2;
                       t1.speak(textToSay, TextToSpeech.QUEUE_ADD, null);
@@ -219,6 +220,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                   }
                 });
               }
+
               final RectF location = result.getLocation();
               if (location != null && result.getConfidence() >= minimumConfidence) {
                 canvas.drawRect(location, paint);

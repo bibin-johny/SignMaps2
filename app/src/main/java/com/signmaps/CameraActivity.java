@@ -17,8 +17,10 @@
 package com.signmaps;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -168,6 +170,31 @@ public abstract class CameraActivity extends AppCompatActivity
 
 
     inferenceTimeTextView = findViewById(R.id.inference_info);
+  }
+  public void Camerapop(String title){
+    final AlertDialog.Builder dialog = new AlertDialog.Builder(this).setTitle("Detected Traffic symbol").setMessage(title);
+    final AlertDialog alert = dialog.create();
+    alert.show();
+
+// Hide after some seconds
+    final Handler handler  = new Handler();
+    final Runnable runnable = new Runnable() {
+      @Override
+      public void run() {
+        if (alert.isShowing()) {
+          alert.dismiss();
+        }
+      }
+    };
+
+    alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+      @Override
+      public void onDismiss(DialogInterface dialog) {
+        handler.removeCallbacks(runnable);
+      }
+    });
+
+    handler.postDelayed(runnable, 3000);
   }
 
   public void ShowPopup() {
