@@ -194,7 +194,7 @@ public abstract class CameraActivity extends AppCompatActivity
       }
     });
 
-    handler.postDelayed(runnable, 3000);
+    handler.postDelayed(runnable, 2000);
   }
 
   public void ShowPopup() {

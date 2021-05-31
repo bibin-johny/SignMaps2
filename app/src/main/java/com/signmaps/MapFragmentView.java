@@ -96,6 +96,7 @@ class MapFragmentView {
                             clongi=-123.008555;
 
                         }
+                        m_mapFragment.getPositionIndicator().setVisible(true);
                         m_map.setCenter(new GeoCoordinate(clat, clongi),
                                 Map.Animation.NONE);
                         //Put this call in Map.onTransformListener if the animation(Linear/Bow)
