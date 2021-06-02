@@ -9,7 +9,13 @@
         android:id="@+id/downloadButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="@string/download_voices"
+        android:background="#007ff0"
+        android:shadowColor="#FF000000"
+        android:shadowDx="0"
+        android:shadowDy="-1"
+        android:shadowRadius=".2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

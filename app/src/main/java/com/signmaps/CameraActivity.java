@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -64,6 +65,7 @@ import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -172,8 +174,53 @@ public abstract class CameraActivity extends AppCompatActivity
     inferenceTimeTextView = findViewById(R.id.inference_info);
   }
   public void Camerapop(String title){
-    final AlertDialog.Builder dialog = new AlertDialog.Builder(this).setTitle("Detected Traffic symbol").setMessage(title);
+    final AlertDialog.Builder dialog = new AlertDialog.Builder(this,R.style.MyDialogTheme).setTitle("           Detected Traffic symbol").setMessage(title);
     final AlertDialog alert = dialog.create();
+
+    ImageView imageView = new ImageView(this);
+
+    switch (title) {
+      case "STOP":
+        imageView.setImageResource(R.drawable.stop);
+        break;
+      case "KEEPRIGHT":
+        imageView.setImageResource(R.drawable.keepright);
+        break;
+      case "LIMIT50":
+        imageView.setImageResource(R.drawable.limit50);
+        break;
+      case "LIMIT80":
+        imageView.setImageResource(R.drawable.limit80);
+        break;
+      case "GIVEWAY":
+        imageView.setImageResource(R.drawable.giveway);
+        break;
+      case "NOENTRY":
+        imageView.setImageResource(R.drawable.noentry);
+        break;
+      case "NOOVERTAKING":
+        imageView.setImageResource(R.drawable.noovertaking);
+        break;
+      case "PRIORITYROAD":
+        imageView.setImageResource(R.drawable.priorityroad);
+        break;
+      case "UNKNOWN":
+        imageView.setImageResource(R.drawable.unknown);
+        break;
+      case "SLIPPERYROAD":
+        imageView.setImageResource(R.drawable.slip);
+        break;
+      case "CAUTIONARYSIGN":
+        imageView.setImageResource(R.drawable.caution);
+        break;
+    }
+
+    alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    WindowManager.LayoutParams wmlp = alert.getWindow().getAttributes();
+
+    wmlp.gravity = Gravity.TOP | Gravity.CENTER;
+
+    alert.setView(imageView);
     alert.show();
 
 // Hide after some seconds
