@@ -28,7 +28,7 @@ trafficSignal
 pedestrianCrossing
 schoolCrossing
 cyclesCrossing
-snow
+unknown
 animals
 restrictionEnds
 goRight
