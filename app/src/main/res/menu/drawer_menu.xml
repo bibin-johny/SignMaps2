@@ -8,7 +8,7 @@
             android:title="Favorite"/>
         <item android:id="@+id/voiceCtrlButton"
             android:icon="@drawable/ic_voice_settings"
-            android:title="Voice Settings"/>
+            android:title="Voice Navigation"/>
         <item android:id="@+id/nav_settings"
             android:icon="@drawable/ic_settings"
             android:title="Settings"/>

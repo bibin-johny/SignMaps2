@@ -207,15 +207,20 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             for (final Classifier.Recognition result : results) {
               if (result.getConfidence()> 0.7 && s1 !=result.getTitle()) {
                 final String s2=result.getTitle();
-
                 t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
                   @Override
                   public void onInit(int status) {
                     if (status == TextToSpeech.SUCCESS) {
-                      Camerapop(result.getTitle().toUpperCase());
-                      String textToSay = "Detected Traffic symbol" + result.getTitle();
-                      s1 = s2;
-                      t1.speak(textToSay, TextToSpeech.QUEUE_ADD, null);
+                      if (SettingsActivity.vstate){
+                        String textToSay = "Detected Traffic symbol" + result.getTitle();
+                        s1 = s2;
+                        t1.speak(textToSay, TextToSpeech.QUEUE_ADD, null);
+                      }
+                      if (SettingsActivity.pstate) {
+                        Camerapop(result.getTitle().toUpperCase());
+                        s1=s2;
+                      }
+
                     }
                   }
                 });

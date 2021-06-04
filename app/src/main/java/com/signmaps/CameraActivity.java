@@ -34,6 +34,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 import android.media.Image.Plane;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import java.io.IOException;
 import java.util.List;
@@ -50,6 +52,7 @@ import android.os.HandlerThread;
 import android.os.Trace;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -139,6 +142,20 @@ public abstract class CameraActivity extends AppCompatActivity
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
+    FloatingActionButton fab = findViewById(R.id.add_fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lay1);
+        if(linearLayout.isShown()){
+          linearLayout.setVisibility(View.INVISIBLE);
+        }
+        else{
+          linearLayout.setVisibility(View.VISIBLE);
+        }
+
+      }
+    });
 
     if (hasPermission()) {
       setFragment();
@@ -329,9 +346,13 @@ public abstract class CameraActivity extends AppCompatActivity
         break;
       case R.id.nav_settings:
         Toast.makeText(this, "clicked Settings", Toast.LENGTH_SHORT).show();
+        Intent intent2 = new Intent(CameraActivity.this, SettingsActivity.class);
+        startActivity(intent2);
         break;
       case R.id.nav_about:
         Toast.makeText(this, "clicked About Us", Toast.LENGTH_SHORT).show();
+        Intent intent1 = new Intent(CameraActivity.this, Aboutus.class);
+        startActivity(intent1);
         break;
     }
     drawer.closeDrawer(GravityCompat.START);
