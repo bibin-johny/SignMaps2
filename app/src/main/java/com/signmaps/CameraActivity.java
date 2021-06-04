@@ -319,6 +319,8 @@ public abstract class CameraActivity extends AppCompatActivity
     switch (menuItem.getItemId()) {
       case R.id.nav_favorites:
         Toast.makeText(this, "clicked Favorites", Toast.LENGTH_SHORT).show();
+        Intent favIntent = new Intent(this, FavoriteActivity.class);
+        startActivity(favIntent);
         break;
       case R.id.voiceCtrlButton:
         Toast.makeText(this, "clicked Voice Settings", Toast.LENGTH_SHORT).show();
