@@ -34,6 +34,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.media.Image;
 import android.media.Image.Plane;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import java.io.IOException;
 import java.util.List;
@@ -140,7 +142,7 @@ public abstract class CameraActivity extends AppCompatActivity
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
-      FloatingActionButton fab = findViewById(R.id.add_fab);
+    FloatingActionButton fab = findViewById(R.id.add_fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -347,6 +349,8 @@ public abstract class CameraActivity extends AppCompatActivity
         break;
       case R.id.nav_about:
         Toast.makeText(this, "clicked About Us", Toast.LENGTH_SHORT).show();
+        Intent intent1 = new Intent(CameraActivity.this, Aboutus.class);
+        startActivity(intent1);
         break;
     }
     drawer.closeDrawer(GravityCompat.START);
