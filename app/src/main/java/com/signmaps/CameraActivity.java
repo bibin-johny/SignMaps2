@@ -139,6 +139,20 @@ public abstract class CameraActivity extends AppCompatActivity
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
+      FloatingActionButton fab = findViewById(R.id.add_fab);
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lay1);
+        if(linearLayout.isShown()){
+          linearLayout.setVisibility(View.INVISIBLE);
+        }
+        else{
+          linearLayout.setVisibility(View.VISIBLE);
+        }
+
+      }
+    });
 
     if (hasPermission()) {
       setFragment();
