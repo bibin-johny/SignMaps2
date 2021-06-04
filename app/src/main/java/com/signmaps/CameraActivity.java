@@ -342,6 +342,8 @@ public abstract class CameraActivity extends AppCompatActivity
         break;
       case R.id.nav_settings:
         Toast.makeText(this, "clicked Settings", Toast.LENGTH_SHORT).show();
+        Intent intent2 = new Intent(CameraActivity.this, SettingsActivity.class);
+        startActivity(intent2);
         break;
       case R.id.nav_about:
         Toast.makeText(this, "clicked About Us", Toast.LENGTH_SHORT).show();
