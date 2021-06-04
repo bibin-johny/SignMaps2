@@ -25,6 +25,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".VoiceSkinsActivity"></activity>
         <activity android:name=".VoicePackagesActivity" />
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".DetectorActivity"
             android:label="@string/app_name"
