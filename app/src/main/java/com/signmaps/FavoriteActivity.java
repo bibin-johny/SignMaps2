@@ -101,6 +101,7 @@ public class FavoriteActivity extends AppCompatActivity {
             @Override
             public void onDeleteClick(int position) {
                 removeItem(position);
+                saveData();
             }
         });
     }
