@@ -17,6 +17,7 @@
 package com.signmaps;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -67,6 +68,7 @@ import android.util.Size;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
@@ -84,6 +86,8 @@ import java.util.List;
 import com.google.android.material.navigation.NavigationView;
 import com.signmaps.env.ImageUtils;
 import com.signmaps.env.Logger;
+
+import static android.view.View.VISIBLE;
 
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,PopUp.Listener, NavigationView.OnNavigationItemSelectedListener,
