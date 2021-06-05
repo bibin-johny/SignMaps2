@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private ArrayList<ExampleItem> mExampleList;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button buttonAdd;
     private EditText editTextSearch;
@@ -46,9 +47,9 @@ public class FavoriteActivity extends AppCompatActivity {
         mAdapter.notifyItemInserted(0);
     }
 
-    public void removeItem(){
-        mExampleList.remove(0);
-        mAdapter.notifyItemInserted(0);
+    public void removeItem(int position){
+        mExampleList.remove(position);
+        mAdapter.notifyItemRemoved(position);
     }
 
     public void createExampleList(){
@@ -63,5 +64,17 @@ public class FavoriteActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
+        });
     }
 }
