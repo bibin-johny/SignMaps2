@@ -22,23 +22,15 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:openDrawer="start">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="640dp"
-        android:layout_marginLeft="300dp"
-        android:src="@drawable/ic_baseline_settings_backup_restore_24"
-        app:fabSize="normal"
-        />
 
 
 
-    <LinearLayout
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="match_parent"
@@ -141,49 +133,161 @@
 
         <!-- Map Fragment embedded with the map object -->
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/lay1">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/lay2"
-        >
-
-        <Button
-            android:id="@+id/naviCtrlButton"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#037BFB"
-            android:textColor="#ffffff" />
-
-        <Button
-            android:id="@+id/btn"
+        <LinearLayout
+            android:id="@+id/lay1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#ffffff"
-            android:text="Where To?"
-            android:textColor="@color/black" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lay2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/naviCtrlButton"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#037BFB"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="Where To?"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/mapfragment"
+                class="com.here.android.mpa.mapping.AndroidXMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
-        <fragment
-        android:id="@+id/mapfragment"
-        class="com.here.android.mpa.mapping.AndroidXMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <TextView
+                android:textAlignment="center"
+                android:id="@+id/textView3"
+                android:visibility="invisible"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="110dp"
+                android:background="@color/black"
+                android:text="Camera Mode"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/oc" />
+
+            <TextView
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:id="@+id/textView4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/black"
+                android:text="Full Map Mode"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView3"
+                app:layout_constraintEnd_toStartOf="@+id/om" />
+
+            <TextView
+                android:visibility="invisible"
+                android:textAlignment="center"
+                android:id="@+id/textView5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="40dp"
+                android:background="@color/black"
+                android:text="Merged Mode"
+                android:textColor="@android:color/background_light"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintEnd_toStartOf="@+id/omc" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/omc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#0066ff"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_call_merge_24"
+                android:visibility="invisible"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/om"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
-    </LinearLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/om"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#0066ff"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_add_location_24"
+                android:visibility="invisible"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/oc"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/oc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
+                android:layout_marginBottom="20dp"
+                android:backgroundTint="#0066ff"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_camera_24"
+                android:visibility="invisible"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/add_fab"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_baseline_cached_24"
+                app:fabSize="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -195,6 +299,4 @@
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
-
 
