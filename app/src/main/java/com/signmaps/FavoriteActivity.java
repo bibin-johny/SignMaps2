@@ -95,7 +95,8 @@ public class FavoriteActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                String dest = mExampleList.get(position).getPlace();
+                // code for setting start and dest in CameraActivity
             }
 
             @Override

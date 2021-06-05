@@ -8,6 +8,11 @@ public class ExampleItem {
         mImageResource = imageResource;
         mText1 = text1;
     }
+
+    public String getPlace(){
+        return mText1;
+    }
+
     public int getImageResource() {
         return mImageResource;
     }
