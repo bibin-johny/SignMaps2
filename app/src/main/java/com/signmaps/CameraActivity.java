@@ -147,7 +147,7 @@ public abstract class CameraActivity extends AppCompatActivity
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
-    FloatingActionButton fab = findViewById(R.id.add_fab);
+    final FloatingActionButton fab = findViewById(R.id.add_fab);
     final FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.oc);
     final FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.om);
     final FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.omc);
@@ -157,11 +157,13 @@ public abstract class CameraActivity extends AppCompatActivity
       public void onClick(View view) {
         if(!isFABOpen){
           isFABOpen=true;
+          fab.animate().rotationBy(180f);
           fab1.show();
           fab2.show();
           fab3.show();
         }else{
           isFABOpen=false;
+          fab.animate().rotationBy(-180f);
           fab1.hide();
           fab2.hide();
           fab3.hide();
