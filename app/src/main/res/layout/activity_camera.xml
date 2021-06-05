@@ -147,6 +147,15 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:text="Where To?"
+                    android:textColor="@color/black" />
+
+                <Button
                     android:id="@+id/naviCtrlButton"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="match_parent"
@@ -155,14 +164,7 @@
                     android:background="#037BFB"
                     android:textColor="#ffffff" />
 
-                <Button
-                    android:id="@+id/btn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#ffffff"
-                    android:text="Where To?"
-                    android:textColor="@color/black" />
+
 
             </LinearLayout>
 
