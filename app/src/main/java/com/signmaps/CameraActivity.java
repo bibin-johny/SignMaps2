@@ -17,6 +17,7 @@
 package com.signmaps;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -67,6 +68,7 @@ import android.util.Size;
 import android.view.MenuItem;
 import android.view.Surface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
@@ -84,6 +86,8 @@ import java.util.List;
 import com.google.android.material.navigation.NavigationView;
 import com.signmaps.env.ImageUtils;
 import com.signmaps.env.Logger;
+
+import static android.view.View.VISIBLE;
 
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,PopUp.Listener, NavigationView.OnNavigationItemSelectedListener,
@@ -130,6 +134,7 @@ public abstract class CameraActivity extends AppCompatActivity
   public static double lon1;
   public static double lat2;
   public static double lon2;
+  public boolean isFABOpen=false;
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
@@ -143,15 +148,52 @@ public abstract class CameraActivity extends AppCompatActivity
     setSupportActionBar(toolbar);
     getSupportActionBar().setDisplayShowTitleEnabled(false);
     FloatingActionButton fab = findViewById(R.id.add_fab);
+    final FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.oc);
+    final FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.om);
+    final FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.omc);
     fab.setOnClickListener(new View.OnClickListener() {
+      @SuppressLint("RestrictedApi")
       @Override
       public void onClick(View view) {
+        if(!isFABOpen){
+          isFABOpen=true;
+          fab1.show();
+          fab2.show();
+          fab3.show();
+        }else{
+          isFABOpen=false;
+          fab1.hide();
+          fab2.hide();
+          fab3.hide();
+        }
+      }
+    });
+    fab1.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lay1);
         if(linearLayout.isShown()){
           linearLayout.setVisibility(View.INVISIBLE);
         }
-        else{
-          linearLayout.setVisibility(View.VISIBLE);
+      }
+    });
+    fab2.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lay1);
+        if(!linearLayout.isShown()){
+          linearLayout.setVisibility(VISIBLE);
+        }
+        setMargins(linearLayout,0,0,0,0);
+      }
+    });
+    fab3.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lay1);
+        setMargins(linearLayout,0,700,0,0);
+        if(!linearLayout.isShown()){
+          linearLayout.setVisibility(VISIBLE);
         }
 
       }
@@ -189,6 +231,13 @@ public abstract class CameraActivity extends AppCompatActivity
 
 
     inferenceTimeTextView = findViewById(R.id.inference_info);
+  }
+  private void setMargins (View view, int left, int top, int right, int bottom) {
+    if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+      ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+      p.setMargins(left, top, right, bottom);
+      view.requestLayout();
+    }
   }
   public void Camerapop(String title){
     final AlertDialog.Builder dialog = new AlertDialog.Builder(this,R.style.MyDialogTheme).setTitle("           Detected Traffic symbol").setMessage(title);
