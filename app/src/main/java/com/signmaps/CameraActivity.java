@@ -151,9 +151,6 @@ public abstract class CameraActivity extends AppCompatActivity
     final FloatingActionButton fab1 = (FloatingActionButton) findViewById(R.id.oc);
     final FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.om);
     final FloatingActionButton fab3 = (FloatingActionButton) findViewById(R.id.omc);
-    final TextView tv1 = (TextView) findViewById(R.id.textView3) ;
-    final TextView tv2 = (TextView) findViewById(R.id.textView4) ;
-    final TextView tv3 = (TextView) findViewById(R.id.textView5) ;
     fab.setOnClickListener(new View.OnClickListener() {
       @SuppressLint("RestrictedApi")
       @Override
@@ -163,18 +160,11 @@ public abstract class CameraActivity extends AppCompatActivity
           fab1.show();
           fab2.show();
           fab3.show();
-          tv1.setVisibility(VISIBLE);
-          tv2.setVisibility(VISIBLE);
-          tv3.setVisibility(VISIBLE);
         }else{
           isFABOpen=false;
           fab1.hide();
           fab2.hide();
           fab3.hide();
-          tv1.setVisibility(View.INVISIBLE);
-          tv2.setVisibility(View.INVISIBLE);
-          tv3.setVisibility(View.INVISIBLE);
-
         }
       }
     });
