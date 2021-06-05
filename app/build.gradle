@@ -44,4 +44,5 @@ dependencies {
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'com.github.medyo:android-about-page:1.2.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 }
