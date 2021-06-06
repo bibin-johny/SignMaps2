@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     Animation top,bottom;
     ImageView image1,image2;
     private static String TAG = SplashActivity.class.getName();
-        private static long SLEEP_TIME = 2;    // Time in seconds to show the picture
+        private static long SLEEP_TIME = 600;    // Time in seconds to show the picture
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 try {
                     // Sleeping
-                    Thread.sleep(SLEEP_TIME*1000);
+                    Thread.sleep(SLEEP_TIME);
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }
