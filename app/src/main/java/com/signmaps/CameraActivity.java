@@ -124,12 +124,12 @@ public abstract class CameraActivity extends AppCompatActivity
   private MapFragmentView m_mapFragmentView;
   private DrawerLayout drawer;
   private Button search;
-  private String loc1;
-  private String loc2;
+  private static String loc1;
+  private static String loc2;
   public static double lat;
   public static double longi;
   private FusedLocationProviderClient fusedLocationProviderClient;
-  private Geocoder geocoder;
+  private static Geocoder geocoder;
   public static double lat1;
   public static double lon1;
   public static double lat2;
@@ -380,6 +380,15 @@ public abstract class CameraActivity extends AppCompatActivity
     lat2 = address2.getLatitude();
     lon2 = address2.getLongitude();
 
+  }
+  public static void fav(String ending) throws  IOException{
+    loc2 = ending;
+    List<Address> addresses2 = geocoder.getFromLocationName(loc2, 1);
+    Address address2 = addresses2.get(0);
+    lat1=lat;
+    lon1=longi;
+    lat2 = address2.getLatitude();
+    lon2 = address2.getLongitude();
   }
 
   @Override

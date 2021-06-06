@@ -1,9 +1,11 @@
 package com.signmaps;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -96,7 +99,12 @@ public class FavoriteActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 String dest = mExampleList.get(position).getPlace();
-                // code for setting start and dest in CameraActivity
+                Toast.makeText(getApplicationContext(),"Destination is now "+ dest,Toast.LENGTH_SHORT).show();
+                try {
+                    CameraActivity.fav(dest);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -106,4 +114,5 @@ public class FavoriteActivity extends AppCompatActivity {
             }
         });
     }
+
 }
