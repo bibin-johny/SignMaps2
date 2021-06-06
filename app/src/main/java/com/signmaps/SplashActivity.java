@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
     Animation top,bottom;
     ImageView image1,image2;
     private static String TAG = SplashActivity.class.getName();
-        private static long SLEEP_TIME = 600;    // Time in seconds to show the picture
+        private static long SLEEP_TIME = 500;    // Time in seconds to show the picture
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
